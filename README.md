@@ -103,7 +103,19 @@ Si se solicita una ruta que no existe (por ejemplo `/api/xyz`), también se resp
 
 ## Ejecución
 
-Requisito: tener instalado Java 21.
+### Requisitos
+
+- **Java 21** (JDK). Verificar con `java -version`.
+- No hace falta instalar Maven: el proyecto incluye Maven Wrapper (`mvnw` / `mvnw.cmd`), que lo descarga automáticamente la primera vez.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/Nicodemus00MG/api_taller1.git
+cd api_taller1
+```
+
+### 2. Ejecutar la aplicación
 
 ```bash
 # Linux / macOS
@@ -113,8 +125,40 @@ Requisito: tener instalado Java 21.
 mvnw.cmd spring-boot:run
 ```
 
+> En Linux/macOS, si aparece `Permission denied`, dar permisos al wrapper con `chmod +x mvnw`.
+
 La API queda disponible en `http://localhost:8080/api/productos`.
 Al iniciar se cargan dos productos de ejemplo: **Laptop** (id 1) y **Mouse** (id 2).
+
+Para detener la aplicación, presionar `Ctrl + C` en la terminal.
+
+### Alternativa: generar y ejecutar el JAR
+
+```bash
+# Linux / macOS
+./mvnw clean package
+java -jar target/api_taller1-0.0.1-SNAPSHOT.jar
+
+# Windows
+mvnw.cmd clean package
+java -jar target\api_taller1-0.0.1-SNAPSHOT.jar
+```
+
+`package` también ejecuta las pruebas del proyecto; para omitirlas se puede añadir `-DskipTests`.
+
+### Alternativa: desde el IDE
+
+Abrir la carpeta del proyecto en IntelliJ IDEA (o en otro IDE con soporte para Maven) y ejecutar la clase `ApiTaller1Application`.
+
+### Cambiar el puerto
+
+Si el puerto 8080 está ocupado, se puede usar otro:
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=8081
+# o con el JAR
+java -jar target/api_taller1-0.0.1-SNAPSHOT.jar --server.port=8081
+```
 
 ## Pruebas
 
